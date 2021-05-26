@@ -117,7 +117,7 @@ let isValidBirthDate = (source, arguments) => {
         return;
     }
 
-    arguments.IsValid = YrUtils.isValidEditableYear(arguments.Value);
+    arguments.IsValid = YrUtils.isValidAnyYear(arguments.Value);
 }
 
 let setupBirthDate = () => {

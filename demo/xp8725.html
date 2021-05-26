@@ -9,19 +9,36 @@
 </head>
 
 <body>
-    <form>
-        Birth Date (MM/DD) <input type="text" class="birth-date" value="08/24/1904">
-        <p style="display: none;" class="error">Date not valid</p>
-        <input type="submit" value="Save">
+    <form id="setup-form">
+        Initial Value <input type="text" id="txtSetup" value="08/24/1904">
+        <input type="submit" value="Setup">
+    </form>
+
+    <br />
+    <form id="test-form">
+
     </form>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="/tests/XP-8725/source.js"></script>
     <script>
         $(() => {
-            setupBirthDate();
+            $("body").on("submit", "#setup-form", (e) => {
+                e.preventDefault();
+                $("#test-form").empty();
+                let initialValue = $("#txtSetup").val();
+                let input = $(`<input type="text" class="birth-date" value="${initialValue}">`);
+                let err = $(`<p style="display: none;" class="error">Date not valid</p>`);
+                let submit = $(`<input type="submit" value="Save">`);
+                $("#test-form").append(`Birth Date (MM/DD)`);
+                $("#test-form").append(input);
+                $("#test-form").append(err);
+                $("#test-form").append(submit);
+                setupBirthDate();
+            });
 
-            $("body").on("submit", "form", (e) => {
+
+            $("body").on("submit", "#test-form", (e) => {
                 e.preventDefault();
                 let validation = {
                     IsValid: true,
