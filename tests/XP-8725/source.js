@@ -125,18 +125,18 @@ let setupBirthDate = () => {
     if (txtBirthDate.length === 0) return;
 
     let initialValue = txtBirthDate.val();
-    if (YrUtils.isValidLockedYear(initialValue)) {
-        // user is not allowed to change its birthday anymore
-        txtBirthDate.attr("disabled", "disabled");
-        return;
-    }
-
     let fakeTxt = $(`<input type='text' maxlength='5' placeholder='MM/DD' value='${initialValue}'>`);
     let trimmedValue = YrUtils.trimYear(initialValue);
     if (Str.isNullOrWhitespace(trimmedValue) === false) {
         let formatted = YrUtils.padDate(trimmedValue);
-        txtBirthDate.val(`${formatted}/${YrUtils.value}`);
         fakeTxt.val(formatted);
+
+        if (YrUtils.isValidLockedYear(initialValue)) {
+            // user is not allowed to change its birthday anymore
+            fakeTxt.attr("disabled", "disabled");
+        } else {
+            txtBirthDate.val(`${formatted}/${YrUtils.value}`);
+        }
     }
 
     fakeTxt.on('change', () => {
