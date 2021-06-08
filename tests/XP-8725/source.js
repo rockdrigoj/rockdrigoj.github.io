@@ -110,14 +110,14 @@ class YrUtils {
 
 // Birthday should be mm/dd only. 
 // Year would be defaulted to 1904 on back-end as per XP-8402
-let isValidBirthDate = (source, arguments) => {
+let isValidBirthDate = (source, obj) => {
 
-    if (Str.isNullOrWhitespace(arguments.Value)) {
-        arguments.IsValid = true;
+    if (Str.isNullOrWhitespace(obj.Value)) {
+        obj.IsValid = true;
         return;
     }
 
-    arguments.IsValid = YrUtils.isValidAnyYear(arguments.Value);
+    obj.IsValid = YrUtils.isValidAnyYear(obj.Value);
 }
 
 let setupBirthDate = () => {
